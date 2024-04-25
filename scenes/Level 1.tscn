@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/StaticBody.gd" type="Script" id=3]
-[ext_resource path="res://scenes/World 1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/StaticBody.gd" type="Script" id=1]
+[ext_resource path="res://scenes/World 1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Box.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/area.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/enemy.gd" type="Script" id=6]
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.498039, 0.498039, 0.498039, 1 )
@@ -24,14 +23,6 @@ albedo_color = Color( 1, 0, 0, 1 )
 material = SubResource( 6 )
 
 [sub_resource type="BoxShape" id=5]
-
-[sub_resource type="CubeMesh" id=8]
-
-[sub_resource type="SpatialMaterial" id=10]
-albedo_color = Color( 0.913725, 0.333333, 0.333333, 1 )
-
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 1, 1, 1.02156 )
 
 [node name="Level" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2426, 6.08681, 5.73078 )
@@ -64,15 +55,15 @@ mesh = SubResource( 1 )
 [node name="CollisionShape" type="CollisionShape" parent="Wall2/StaticBody"]
 shape = SubResource( 2 )
 
-[node name="Box" parent="." instance=ExtResource( 1 )]
+[node name="Box" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97242, 1.41444, 0 )
 visible = false
 
-[node name="Box3" parent="." instance=ExtResource( 1 )]
+[node name="Box3" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97242, 1.41444, -3.342 )
 visible = false
 
-[node name="Box2" parent="." instance=ExtResource( 1 )]
+[node name="Box2" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97242, 1.41444, 3.30037 )
 visible = false
 
@@ -86,16 +77,16 @@ visible = false
 mesh = SubResource( 4 )
 
 [node name="StaticBody" type="StaticBody" parent="Switch"]
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 light = NodePath("../../OmniLight")
 
 [node name="CollisionShape" type="CollisionShape" parent="Switch/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="World 1" parent="." instance=ExtResource( 4 )]
+[node name="World 1" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.42645, 15.9526, 10.096 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38863, 2.25921, 26.2524 )
 
 [node name="Area2" parent="." instance=ExtResource( 5 )]
@@ -105,16 +96,3 @@ sceneName = "Level"
 [node name="Area" parent="." instance=ExtResource( 5 )]
 transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -3.43987, 2.89056, 58.3937 )
 sceneName = "Win Screen"
-
-[node name="enemy" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7322, 1.01876, 41.6956 )
-mesh = SubResource( 8 )
-material/0 = SubResource( 10 )
-script = ExtResource( 6 )
-
-[node name="Area" type="Area" parent="enemy"]
-
-[node name="CollisionShape" type="CollisionShape" parent="enemy/Area"]
-shape = SubResource( 9 )
-
-[connection signal="body_entered" from="enemy/Area" to="enemy" method="_on_Area_body_entered"]

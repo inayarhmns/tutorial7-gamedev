@@ -27,13 +27,21 @@ func _physics_process(delta):
 
 	var movement_vector = Vector3()
 	if Input.is_action_pressed("movement_forward"):
+		speed = 10
 		movement_vector -= head_basis.z
 	if Input.is_action_pressed("movement_backward"):
+		speed = 10
 		movement_vector += head_basis.z
 	if Input.is_action_pressed("movement_left"):
+		speed = 10
 		movement_vector -= head_basis.x
 	if Input.is_action_pressed("movement_right"):
+		speed = 10
 		movement_vector += head_basis.x
+	if Input.is_action_pressed("flee"):
+		speed = 20 
+	if Input.is_action_pressed("crouch"):
+		speed = 5 
 
 	movement_vector = movement_vector.normalized()
 

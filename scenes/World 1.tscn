@@ -4,12 +4,37 @@
 
 [node name="World 1" type="Spatial"]
 
-[node name="Room 1" type="CSGBox" parent="."]
+[node name="lamp" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39275, -7.05568, -0.548208 )
+visible = false
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="Room 1" type="CSGBox" parent="CSGCombiner"]
+visible = false
 use_collision = true
 invert_faces = true
 width = 30.0
 height = 30.0
 depth = 30.0
 
-[node name="lamp" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39275, -7.05568, -0.548208 )
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7931, -33.6738, 37.0398 )
+width = 41.8196
+height = 35.2708
+depth = 49.6184
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90896, -33.9508, 25.9627 )
+operation = 2
+invert_faces = true
+width = 32.991
+height = 38.1261
+depth = 17.4164
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0596619, -16.1179, 27.9578 )
+width = 6.83418
+height = 2.8098
+depth = 10.1629
